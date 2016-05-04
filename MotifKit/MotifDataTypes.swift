@@ -33,6 +33,11 @@ struct ParsedTheme: Hashable {
     var name: String
     var data: ThemeData
     
+    init(_ tuple: (name: String, data: ThemeData))  {
+        name = tuple.name
+        data = tuple.data
+    }
+    
     var hashValue: Int {
         return self.name.hashValue
     }

@@ -39,7 +39,7 @@ class MotifUtils {
                 // If the property has a value and a label we're good
                 if let propertyName = label {
                     if value is StoredType {
-                        classProperties[propertyName] = value as! StoredType
+                        classProperties[propertyName] = value as? StoredType
                     }
                 }
             }
