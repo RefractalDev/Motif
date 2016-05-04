@@ -1,0 +1,422 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ABC750861CD5868900FD0103 /* MotifKit.h in Headers */ = {isa = PBXBuildFile; fileRef = ABC750851CD5868900FD0103 /* MotifKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABC7508D1CD5868900FD0103 /* MotifKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC750821CD5868800FD0103 /* MotifKit.framework */; };
+		ABC750921CD5868900FD0103 /* MotifKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC750911CD5868900FD0103 /* MotifKitTests.swift */; };
+		ABC7509D1CD595E400FD0103 /* Motif.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC7509C1CD595E400FD0103 /* Motif.swift */; };
+		ABC7509F1CD5964200FD0103 /* MotifTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC7509E1CD5964200FD0103 /* MotifTheme.swift */; };
+		ABC750A11CD5968600FD0103 /* MotifTestThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC750A01CD5968600FD0103 /* MotifTestThemes.swift */; };
+		ABC750A31CD6B78000FD0103 /* MotifError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC750A21CD6B78000FD0103 /* MotifError.swift */; };
+		ABC750C71CD83C7100FD0103 /* MotifDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC750C61CD83C7000FD0103 /* MotifDataTypes.swift */; };
+		ABC750C91CD83D6500FD0103 /* MotifUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC750C81CD83D6500FD0103 /* MotifUtils.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ABC7508E1CD5868900FD0103 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ABC750791CD5868800FD0103 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ABC750811CD5868800FD0103;
+			remoteInfo = MotifKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		ABC750821CD5868800FD0103 /* MotifKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MotifKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABC750851CD5868900FD0103 /* MotifKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MotifKit.h; sourceTree = "<group>"; };
+		ABC750871CD5868900FD0103 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABC7508C1CD5868900FD0103 /* MotifKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MotifKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABC750911CD5868900FD0103 /* MotifKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotifKitTests.swift; sourceTree = "<group>"; };
+		ABC750931CD5868900FD0103 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABC7509C1CD595E400FD0103 /* Motif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Motif.swift; sourceTree = "<group>"; };
+		ABC7509E1CD5964200FD0103 /* MotifTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotifTheme.swift; sourceTree = "<group>"; };
+		ABC750A01CD5968600FD0103 /* MotifTestThemes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotifTestThemes.swift; sourceTree = "<group>"; };
+		ABC750A21CD6B78000FD0103 /* MotifError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotifError.swift; sourceTree = "<group>"; };
+		ABC750C61CD83C7000FD0103 /* MotifDataTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotifDataTypes.swift; sourceTree = "<group>"; };
+		ABC750C81CD83D6500FD0103 /* MotifUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotifUtils.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ABC7507E1CD5868800FD0103 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABC750891CD5868900FD0103 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABC7508D1CD5868900FD0103 /* MotifKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ABC750781CD5868800FD0103 = {
+			isa = PBXGroup;
+			children = (
+				ABC750841CD5868900FD0103 /* MotifKit */,
+				ABC750901CD5868900FD0103 /* MotifKitTests */,
+				ABC750831CD5868800FD0103 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ABC750831CD5868800FD0103 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ABC750821CD5868800FD0103 /* MotifKit.framework */,
+				ABC7508C1CD5868900FD0103 /* MotifKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ABC750841CD5868900FD0103 /* MotifKit */ = {
+			isa = PBXGroup;
+			children = (
+				ABC750851CD5868900FD0103 /* MotifKit.h */,
+				ABC750871CD5868900FD0103 /* Info.plist */,
+				ABC7509C1CD595E400FD0103 /* Motif.swift */,
+				ABC750C81CD83D6500FD0103 /* MotifUtils.swift */,
+				ABC750C61CD83C7000FD0103 /* MotifDataTypes.swift */,
+				ABC7509E1CD5964200FD0103 /* MotifTheme.swift */,
+				ABC750A21CD6B78000FD0103 /* MotifError.swift */,
+			);
+			path = MotifKit;
+			sourceTree = "<group>";
+		};
+		ABC750901CD5868900FD0103 /* MotifKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				ABC750911CD5868900FD0103 /* MotifKitTests.swift */,
+				ABC750931CD5868900FD0103 /* Info.plist */,
+				ABC750A01CD5968600FD0103 /* MotifTestThemes.swift */,
+			);
+			path = MotifKitTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		ABC7507F1CD5868800FD0103 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABC750861CD5868900FD0103 /* MotifKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		ABC750811CD5868800FD0103 /* MotifKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABC750961CD5868900FD0103 /* Build configuration list for PBXNativeTarget "MotifKit" */;
+			buildPhases = (
+				ABC7507D1CD5868800FD0103 /* Sources */,
+				ABC7507E1CD5868800FD0103 /* Frameworks */,
+				ABC7507F1CD5868800FD0103 /* Headers */,
+				ABC750801CD5868800FD0103 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MotifKit;
+			productName = MotifKit;
+			productReference = ABC750821CD5868800FD0103 /* MotifKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		ABC7508B1CD5868900FD0103 /* MotifKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABC750991CD5868900FD0103 /* Build configuration list for PBXNativeTarget "MotifKitTests" */;
+			buildPhases = (
+				ABC750881CD5868900FD0103 /* Sources */,
+				ABC750891CD5868900FD0103 /* Frameworks */,
+				ABC7508A1CD5868900FD0103 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ABC7508F1CD5868900FD0103 /* PBXTargetDependency */,
+			);
+			name = MotifKitTests;
+			productName = MotifKitTests;
+			productReference = ABC7508C1CD5868900FD0103 /* MotifKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ABC750791CD5868800FD0103 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Refractal;
+				TargetAttributes = {
+					ABC750811CD5868800FD0103 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					ABC7508B1CD5868900FD0103 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = ABC7507C1CD5868800FD0103 /* Build configuration list for PBXProject "MotifKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = ABC750781CD5868800FD0103;
+			productRefGroup = ABC750831CD5868800FD0103 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ABC750811CD5868800FD0103 /* MotifKit */,
+				ABC7508B1CD5868900FD0103 /* MotifKitTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ABC750801CD5868800FD0103 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABC7508A1CD5868900FD0103 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ABC7507D1CD5868800FD0103 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABC750A31CD6B78000FD0103 /* MotifError.swift in Sources */,
+				ABC750C71CD83C7100FD0103 /* MotifDataTypes.swift in Sources */,
+				ABC7509D1CD595E400FD0103 /* Motif.swift in Sources */,
+				ABC7509F1CD5964200FD0103 /* MotifTheme.swift in Sources */,
+				ABC750C91CD83D6500FD0103 /* MotifUtils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABC750881CD5868900FD0103 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABC750921CD5868900FD0103 /* MotifKitTests.swift in Sources */,
+				ABC750A11CD5968600FD0103 /* MotifTestThemes.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ABC7508F1CD5868900FD0103 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ABC750811CD5868800FD0103 /* MotifKit */;
+			targetProxy = ABC7508E1CD5868900FD0103 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		ABC750941CD5868900FD0103 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		ABC750951CD5868900FD0103 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		ABC750971CD5868900FD0103 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = MotifKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.refractal.MotifKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ABC750981CD5868900FD0103 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = MotifKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.refractal.MotifKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		ABC7509A1CD5868900FD0103 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = MotifKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.refractal.MotifKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		ABC7509B1CD5868900FD0103 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = MotifKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.refractal.MotifKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ABC7507C1CD5868800FD0103 /* Build configuration list for PBXProject "MotifKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABC750941CD5868900FD0103 /* Debug */,
+				ABC750951CD5868900FD0103 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABC750961CD5868900FD0103 /* Build configuration list for PBXNativeTarget "MotifKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABC750971CD5868900FD0103 /* Debug */,
+				ABC750981CD5868900FD0103 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABC750991CD5868900FD0103 /* Build configuration list for PBXNativeTarget "MotifKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABC7509A1CD5868900FD0103 /* Debug */,
+				ABC7509B1CD5868900FD0103 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ABC750791CD5868800FD0103 /* Project object */;
+}
