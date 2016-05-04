@@ -81,6 +81,30 @@ public class Motif {
         return true
     }
     
+    public class func setColor(passedClasses: [NSObject], variable: String, key: String, file: String = #file) {
+        for passedClass in passedClasses {
+            sharedInstance.setObject(key, file: file, completion: { object in
+                passedClass.setValue(object as! UIColor, forKey: variable)
+            })
+        }
+    }
+    
+    public class func setFont(passedClasses: [NSObject], variable: String, key: String, size: CGFloat, file: String = #file) {
+        for passedClass in passedClasses {
+            sharedInstance.setObject(key, file: file, completion: { object in
+                passedClass.setValue((object as! UIFont).fontWithSize(size), forKey: variable)
+            })
+        }
+    }
+    
+    public class func setAttributes(passedClasses: [NSObject], variable: String, key: String, file: String = #file) {
+        for passedClass in passedClasses {
+            sharedInstance.setObject(key, file: file, completion: { object in
+                passedClass.setValue((object as! MotifAttributes).attributes, forKey: variable)
+            })
+        }
+    }
+    
     public class func setColor(passedClass: NSObject, variable: String, key: String, file: String = #file) {
         // Return the specified color
         sharedInstance.setObject(key, file: file, completion: { object in

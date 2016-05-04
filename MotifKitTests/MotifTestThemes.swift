@@ -10,13 +10,17 @@ import Foundation
 @testable import MotifKit
 
 struct DarkTheme: MotifTheme {
-    struct TestMenu {
-        static let TextColor = UIColor.greenColor()
+    let classes: [MotifClass] = [TestMenu()]
+    
+    struct TestMenu: MotifClass {
+        let TextColor = UIColor.greenColor()
     }
 }
 
 struct LightTheme: MotifTheme {
-    struct TestMenu {
-        static let TextColor = UIColor.blueColor()
+    let classes: [MotifClass] = [TestMenu()]
+    
+    struct TestMenu: MotifClass {
+        let TextColor = UIColor.blueColor()
     }
 }
