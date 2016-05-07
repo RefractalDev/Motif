@@ -81,80 +81,27 @@ public class Motif {
         return true
     }
     
-    public class func setColor(passedClasses: [NSObject], variable: String, key: String, file: String = #file) {
-        for passedClass in passedClasses {
+    public class func setObject<T: Any>(type: T.Type, key: String, target: NSObject..., variable: String, file: String = #file) {
+        for passedClass in target {
             sharedInstance.setObject(key, file: file, completion: { object in
-                passedClass.setValue(object as! UIColor, forKey: variable)
+                passedClass.setValue(object, forKey: variable)
             })
         }
     }
     
-    public class func setFont(passedClasses: [NSObject], variable: String, key: String, size: CGFloat, file: String = #file) {
-        for passedClass in passedClasses {
-            sharedInstance.setObject(key, file: file, completion: { object in
-                passedClass.setValue((object as! UIFont).fontWithSize(size), forKey: variable)
-            })
-        }
+    public class func setObject<T: Any>(type: T.Type, key: String, file: String = #file, completion: (T) -> Void) {
+        sharedInstance.setObject(key, file: file, completion: completion)
     }
     
-    public class func setAttributes(passedClasses: [NSObject], variable: String, key: String, file: String = #file) {
-        for passedClass in passedClasses {
-            sharedInstance.setObject(key, file: file, completion: { object in
-                passedClass.setValue((object as! MotifAttributes).attributes, forKey: variable)
-            })
-        }
-    }
-    
-    public class func setColor(passedClass: NSObject, variable: String, key: String, file: String = #file) {
-        // Return the specified color
-        sharedInstance.setObject(key, file: file, completion: { object in
-            passedClass.setValue(object as! UIColor, forKey: variable)
-        })
-    }
-    
-    public class func setFont(passedClass: NSObject, variable: String, key: String, size: CGFloat, file: String = #file) {
-        // Return the specified font, with our defined size
-        sharedInstance.setObject(key, file: file, completion: { object in
-            passedClass.setValue((object as! UIFont).fontWithSize(size), forKey: variable)
-        })
-    }
-    
-    public class func setAttributes(passedClass: NSObject, variable: String, key: String, file: String = #file) {
-        sharedInstance.setObject(key, file: file, completion: { object in
-            passedClass.setValue((object as! MotifAttributes).attributes, forKey: variable)
-        })
-    }
-    
-    public class func setColor(key: String, file: String = #file, completion: (UIColor) -> Void) {
-        // Return the specified color
-        sharedInstance.setObject(key, file: file, completion: { object in
-            completion(object as! UIColor)
-        })
-    }
-
-    public class func setFont(key: String, size: CGFloat, file: String = #file, completion: (UIFont) -> Void) {
-        // Return the specified font, with our defined size
-        sharedInstance.setObject(key, file: file, completion: { object in
-            completion((object as! UIFont).fontWithSize(size))
-        })
-    }
-    
-    public class func setAttributes(key: String, file: String = #file, completion: ([String: AnyObject]) -> Void) {
-        // Return our attributes list
-        sharedInstance.setObject(key, file: file, completion: { object in
-            completion((object as! MotifAttributes).attributes)
-        })
-    }
-    
-    private func setObject(key: String, file: String, completion: (StoredType) -> Void) {
+    private func setObject<T: Any>(key: String, file: String, completion: (T) -> Void) {
         // Get the name of the calling class from its file path
         let className = (NSURL(string: file)!.URLByDeletingPathExtension?.lastPathComponent)!
-        
         
         func applyObject() {
             do {
                 let object = try MotifUtils.getRelevantObject(className, key: key)
-                completion(object)
+                
+                completion(object as! T)
             } catch let error {
                 print("MotifKit Error: SET_OBJECT (\(error))")
             }

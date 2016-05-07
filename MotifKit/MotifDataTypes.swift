@@ -11,22 +11,10 @@ import Foundation
 // These types are used to define and store the types of information Motif can handle
 
 // [Class: [Item: Value]]
-typealias ThemeData = [String: [String: StoredType]]
+typealias ThemeData = [String: [String: Any]]
 
 // This event is called to update our variables
 typealias UpdateEvent = () -> Void
-
-// All allowed storable types must conform to this protocol
-protocol StoredType {}
-
-// In order to make our attributes conform to StoredType, we wrap them in a struct
-public struct MotifAttributes {
-    var attributes: [String: AnyObject]
-    
-    public init(_ attributes: [String: AnyObject]) {
-        self.attributes = attributes
-    }
-}
 
 // Wrap our basic parsed theme info in a Hashable struct to store in a Set
 struct ParsedTheme: Hashable {
@@ -46,7 +34,3 @@ struct ParsedTheme: Hashable {
 func ==(lhs: ParsedTheme, rhs: ParsedTheme) -> Bool {
     return lhs.name == rhs.name
 }
-
-extension UIColor: StoredType {}
-extension UIFont: StoredType {}
-extension MotifAttributes: StoredType {}

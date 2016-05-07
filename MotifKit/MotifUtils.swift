@@ -32,15 +32,13 @@ class MotifUtils {
             let className = String(themeClass.dynamicType)
             let classMirror = Mirror(reflecting: themeClass)
             
-            var classProperties = [String: StoredType]()
+            var classProperties = [String: Any]()
             
             // Interate through our object properties
             for (label, value) in classMirror.children {
                 // If the property has a value and a label we're good
                 if let propertyName = label {
-                    if value is StoredType {
-                        classProperties[propertyName] = value as? StoredType
-                    }
+                    classProperties[propertyName] = value
                 }
             }
             // Set the class properties for the class
@@ -54,7 +52,7 @@ class MotifUtils {
         return (themeName, finalClassesArray)
     }
     
-    class func getRelevantObject(file: String, key: String) throws -> StoredType {
+    class func getRelevantObject(file: String, key: String) throws -> Any {
         // First, get our current theme name
         guard let currentThemeKey = Motif.sharedInstance.currentTheme else { throw MotifError.NoLoadedTemplate }
         
@@ -69,11 +67,11 @@ class MotifUtils {
         guard (currentTheme[file] != nil) else { throw MotifError.UnknownEntity(name: key, theme: file) }
         
         // Then check the Class-specific data
-        let classData = currentTheme[file]! as [String: StoredType]
+        let classData = currentTheme[file]! as [String: Any]
         // Second, check the generic data..
-        let defaultData = currentTheme["Default"]! as [String: StoredType]
+        let defaultData = currentTheme["Default"]! as [String: Any]
         
-        var objectData: StoredType?
+        var objectData: Any?
         
         // Finally, check both sets for a matching key
         if (classData[key] != nil) {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB6D04C81CDE9CB6003A5DA1 /* MotifTypeFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6D04C71CDE9CB6003A5DA1 /* MotifTypeFunctions.swift */; };
 		ABC750861CD5868900FD0103 /* MotifKit.h in Headers */ = {isa = PBXBuildFile; fileRef = ABC750851CD5868900FD0103 /* MotifKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABC7508D1CD5868900FD0103 /* MotifKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC750821CD5868800FD0103 /* MotifKit.framework */; };
 		ABC750921CD5868900FD0103 /* MotifKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC750911CD5868900FD0103 /* MotifKitTests.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AB6D04C71CDE9CB6003A5DA1 /* MotifTypeFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotifTypeFunctions.swift; sourceTree = "<group>"; };
 		ABC750821CD5868800FD0103 /* MotifKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MotifKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC750851CD5868900FD0103 /* MotifKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MotifKit.h; sourceTree = "<group>"; };
 		ABC750871CD5868900FD0103 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				ABC750851CD5868900FD0103 /* MotifKit.h */,
 				ABC750871CD5868900FD0103 /* Info.plist */,
 				ABC7509C1CD595E400FD0103 /* Motif.swift */,
+				AB6D04C71CDE9CB6003A5DA1 /* MotifTypeFunctions.swift */,
 				ABC750C81CD83D6500FD0103 /* MotifUtils.swift */,
 				ABC750C61CD83C7000FD0103 /* MotifDataTypes.swift */,
 				ABC7509E1CD5964200FD0103 /* MotifTheme.swift */,
@@ -213,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABC750A31CD6B78000FD0103 /* MotifError.swift in Sources */,
+				AB6D04C81CDE9CB6003A5DA1 /* MotifTypeFunctions.swift in Sources */,
 				ABC750C71CD83C7100FD0103 /* MotifDataTypes.swift in Sources */,
 				ABC7509D1CD595E400FD0103 /* Motif.swift in Sources */,
 				ABC7509F1CD5964200FD0103 /* MotifTheme.swift in Sources */,
