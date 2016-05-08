@@ -13,7 +13,7 @@
   • <a href="#license">License</a>
 </p>
 
-Motif is a lightweight way to handle, reload and centralise all of your Colors, Fonts and other theming data. 
+Motif is a lightweight way to handle, reload and centralise all of your Colors, Fonts and more.
 
 ```swift
 struct SomeTheme: MotifTheme {
@@ -32,8 +32,9 @@ class SomeMenu {
 
 	let someView = SomeView(...)
 
-	Motif.setColor(someView, variable: "textColor", key: "TextColor")
-
+	Motif.setColor("TextColor", target: someView, variable: "textColor")
+	
+	// someView's textColor should now be Green
 }
 
 ... later ...
@@ -47,7 +48,9 @@ Motif.setTheme("NewTheme")
 You can store:
 * [x] Colors
 * [x] Fonts
-* [x] Arrays of attributes
+* [x] Arrays of attributes 
+* [x] Strings
+* [x] Any object (With some manual labor)
 
 ## Compatibility
 
@@ -57,7 +60,7 @@ Motif requires iOS 8+ and is compatible with **Swift 2** projects. Objective-C s
 
 Installation for [Carthage](https://github.com/Carthage/Carthage) is extremely simple:
 
-`github "refractaldev/Motif" ~> 0.6`
+`github "refractaldev/Motif" ~> 0.7`
 
 As for [CocoaPods](https://cocoapods.org), we currently don't support the platform. 
 However, any Pull Requests adding support will be gladly accepted.
@@ -69,14 +72,20 @@ Pantry provides serialization of most basic UI customisation types (`UIColor`, `
 
 ```swift
 struct DarkTheme: MotifTheme {
-    let classes: [MotifClass] = [SomeMenu()]
+    let classes: [MotifClass] = [Default(), SomeMenu()]
+    
+    // Optionally, you can setup a Default class which variables can fallback to
+    struct Default: MotifClass {
+    	let TextColor = UIColor.darkGrayColor()
+    	let ThemeDescription: String = "This is a description for our theme, it could be shown in a setting view."
+    }
     
     struct SomeMenu: MotifClass {
-        let TextColor = UIColor.lightGray()
+        let TextColor = UIColor.lightGrayColor()
         let TextFont = UIFont(name: "Avenir", size: 1)!
-        let TextAttributes = MotifAttributes([
+        let TextAttributes: [String: AnyObject] = [
             NSStrikethroughStyleAttributeName: 1
-        ])
+        ]
     }
 }
 
@@ -104,6 +113,11 @@ You can then apply attributes from your newly created theme to a view or group o
 	// Apply to an object using a completion handler
 	Motif.setAttributes("TextAttributes", completion: { attributes in
             self.testLabel!.attributedText = NSAttributedString(string: "This is a test", attributes: attributes)
+    })
+    
+    //Want to load a custom attribute? You can do that too..
+    Motif.setObject(String.self, key: "ThemeDescription", completion: { string in
+    	print(string)
     })
 ```
 
