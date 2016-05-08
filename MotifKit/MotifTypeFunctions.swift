@@ -34,8 +34,8 @@ extension Motif {
         }
     }
     
-    public class func setAttributes(key: String, targer: NSObject..., variable: String, file: String = #file) {
-        for passedClass in targer {
+    public class func setAttributes(key: String, target: NSObject..., variable: String, file: String = #file) {
+        for passedClass in target {
             setObject([String: AnyObject].self, key: key, target: passedClass, variable: variable, file: file)
         }
     }
