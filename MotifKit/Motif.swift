@@ -19,7 +19,7 @@ public class Motif {
     var themes = Set<ParsedTheme>()
     var updateEvents = [UpdateEvent]()
     
-    public class func addTheme<T: MotifTheme>(theme: T) {
+    public class func addTheme(theme: MotifTheme) {
         // First, parse our theme class
         let parseData: (String, ThemeData)?
         let error: ErrorType?
@@ -51,8 +51,8 @@ public class Motif {
         return sharedInstance.themes.map({$0.name})
     }
     
-    public class func getCurrentTheme() -> String {
-        return (sharedInstance.currentTheme != nil) ? sharedInstance.currentTheme! : "None"
+    public class func getCurrentTheme() -> String? {
+        return sharedInstance.currentTheme
     }
     
     public class func resetThemes() {
@@ -81,27 +81,38 @@ public class Motif {
         return true
     }
     
-    public class func setObject<T: Any>(type: T.Type, key: String, target: NSObject..., variable: String, file: String = #file) {
+    public class func setObject<T: RawRepresentable>(type: T.Type, key: String, target: NSObject..., variable: String, file: String = #file) {
         for passedClass in target {
-            sharedInstance.setObject(key, file: file, completion: { object in
-                passedClass.setValue(object, forKey: variable)
+            sharedInstance.setObject(type, key: key, file: file, completion: { object in
+                // If it's an enum, work around that and set the rawValue
+                passedClass.setValue(object.rawValue as! AnyObject, forKey: variable)
             })
         }
     }
     
-    public class func setObject<T: Any>(type: T.Type, key: String, file: String = #file, completion: (T) -> Void) {
-        sharedInstance.setObject(key, file: file, completion: completion)
+    public class func setObject<T>(type: T.Type, key: String, target: NSObject..., variable: String, file: String = #file) {
+        for passedClass in target {
+            
+            sharedInstance.setObject(type, key: key, file: file, completion: { object in
+                // If it's an object, handle it as an object
+                passedClass.setValue(object as! AnyObject, forKey: variable)
+            })
+        }
     }
     
-    private func setObject<T: Any>(key: String, file: String, completion: (T) -> Void) {
+    public class func setObject<T>(type: T.Type, key: String, file: String = #file, completion: (T) -> Void) {
+        sharedInstance.setObject(type, key: key, file: file, completion: completion)
+    }
+    
+    private func setObject<T>(type: T.Type, key: String, file: String, completion: (T) -> Void) {
         // Get the name of the calling class from its file path
         let className = (NSURL(string: file)!.URLByDeletingPathExtension?.lastPathComponent)!
         
         func applyObject() {
             do {
-                let object = try MotifUtils.getRelevantObject(className, key: key)
+                let object: T = try MotifUtils.getRelevantObject(className, key: key)
                 
-                completion(object as! T)
+                completion(object)
             } catch let error {
                 print("MotifKit Error: SET_OBJECT (\(error))")
             }
@@ -115,5 +126,4 @@ public class Motif {
             applyObject()
         })
     }
-
 }

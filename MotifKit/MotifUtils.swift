@@ -52,7 +52,7 @@ class MotifUtils {
         return (themeName, finalClassesArray)
     }
     
-    class func getRelevantObject(file: String, key: String) throws -> Any {
+    class func getRelevantObject<T>(file: String, key: String) throws -> T {
         // First, get our current theme name
         guard let currentThemeKey = Motif.sharedInstance.currentTheme else { throw MotifError.NoLoadedTemplate }
         
@@ -83,7 +83,9 @@ class MotifUtils {
         // If we don't match either, throw an invalid key error
         guard (objectData != nil) else { throw MotifError.InvalidKey(name: key) }
         
+        guard objectData is T else { throw MotifError.TypeMismatch(name: key, type: String(T.self)) }
+        
         // And then return our lovely value
-        return objectData!
+        return objectData as! T
     }
 }

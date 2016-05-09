@@ -20,5 +20,5 @@ public enum MotifError: ErrorType {
     // The provided key cannot be found in any theme class
     case InvalidKey(name: String)
     // The provided object does not match the type defined
-    case TypeMismatch(name: String)
+    case TypeMismatch(name: String, type: String)
 }
