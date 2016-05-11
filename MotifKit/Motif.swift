@@ -85,7 +85,7 @@ public class Motif {
         for passedClass in target {
             sharedInstance.setObject(type, key: key, file: file, completion: { object in
                 // If it's an enum, work around that and set the rawValue
-                passedClass.setValue(object.rawValue as! AnyObject, forKey: variable)
+                passedClass.setValue(object.rawValue as? AnyObject, forKey: variable)
             })
         }
     }
@@ -95,7 +95,7 @@ public class Motif {
             
             sharedInstance.setObject(type, key: key, file: file, completion: { object in
                 // If it's an object, handle it as an object
-                passedClass.setValue(object as! AnyObject, forKey: variable)
+                passedClass.setValue(object as? AnyObject, forKey: variable)
             })
         }
     }
@@ -105,8 +105,9 @@ public class Motif {
     }
     
     private func setObject<T>(type: T.Type, key: String, file: String, completion: (T) -> Void) {
-        // Get the name of the calling class from its file path
-        let className = (NSURL(string: file)!.URLByDeletingPathExtension?.lastPathComponent)!
+        // Remove any spaces from the file string, and get the name of the calling class from its file path
+        let patchedFile = file.stringByAddingPercentEncodingWithAllowedCharacters(.URLQueryAllowedCharacterSet())!
+        let className = (NSURL(string: patchedFile)!.URLByDeletingPathExtension?.lastPathComponent)!
         
         func applyObject() {
             do {
