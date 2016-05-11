@@ -60,7 +60,7 @@ Motif requires iOS 8+ and is compatible with **Swift 2** projects. Objective-C s
 
 Installation for [Carthage](https://github.com/Carthage/Carthage) is extremely simple:
 
-`github "refractaldev/Motif" ~> 0.7`
+`github "refractaldev/Motif"`
 
 As for [CocoaPods](https://cocoapods.org), we currently don't support the platform. 
 However, any Pull Requests adding support will be gladly accepted.

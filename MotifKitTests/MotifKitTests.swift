@@ -23,6 +23,8 @@ class MotifKitTests: XCTestCase {
     
     func testAddingTheme() {
         Motif.addTheme(DarkTheme())
+        
+        
     }
     
     func testExample() {
