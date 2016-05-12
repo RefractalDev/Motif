@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MotifUtils {
+class Utils {
     class func parseTheme(theme: MotifTheme) throws -> (String, ThemeData) {
         // First, get the theme name
         let themeName = String(theme.dynamicType)
@@ -64,25 +64,31 @@ class MotifUtils {
         // Third, acquire the actual object
         let currentTheme = Motif.sharedInstance.themes[currentThemeIndex!].data
         
-        guard (currentTheme[file] != nil) else { throw MotifError.UnknownEntity(name: key, theme: file) }
-        
         // Then check the Class-specific data
-        let classData = currentTheme[file]! as [String: Any]
+        let classData: [String: Any]? = currentTheme[file]
         // Second, check the generic data..
-        let defaultData = currentTheme["Default"]! as [String: Any]
+        let defaultData: [String: Any]? = currentTheme["Default"]
         
         var objectData: Any?
         
         // Finally, check both sets for a matching key
-        if (classData[key] != nil) {
-            objectData = classData[key]
-        } else if (defaultData[key] != nil) {
-            objectData = defaultData[key]
+        if (classData != nil) {
+            objectData = classData![key]
+        }
+        
+        if (defaultData != nil && objectData == nil) {
+            objectData = defaultData![key]
+        }
+        
+        // If there's no match, and you don't have a class definition, throw a missing class error
+        if (objectData == nil && classData == nil) {
+            throw MotifError.MissingClassDefinition(name: file)
         }
         
         // If we don't match either, throw an invalid key error
         guard (objectData != nil) else { throw MotifError.InvalidKey(name: key) }
-        
+
+        /// If our given type doesn't match, then return an error
         guard objectData is T else { throw MotifError.TypeMismatch(name: key, type: String(T.self)) }
         
         // And then return our lovely value
