@@ -19,13 +19,13 @@ public class Motif {
     var themes = Set<ParsedTheme>()
     var updateEvents = [UpdateEvent]()
     
-    public class func addTheme(theme: MotifTheme) {
+    public class func addTheme(theme: MotifTheme) -> Bool {
         // First, parse our theme class
         let parseData: (String, ThemeData)?
         let error: ErrorType?
         
         do {
-            parseData = try MotifUtils.parseTheme(theme)
+            parseData = try Utils.parseTheme(theme)
             error = nil
         } catch let thrownError {
             parseData = nil
@@ -34,16 +34,24 @@ public class Motif {
         
         // Double-check we don't have an invalid theme
         guard let parsedTheme: (name: String, data: ThemeData) = parseData else {
-            return print("MotifKit Error: INVALID_THEME (\(error!))")
+            fatalError("MotifKit Error: INVALID_THEME (\(error!))")
+        }
+        
+        let parsedThemeObject = ParsedTheme(parsedTheme)
+        
+        if(sharedInstance.themes.contains(parsedThemeObject)) {
+            return false
         }
         
         // First, store the theme
-        sharedInstance.themes.insert(ParsedTheme(parsedTheme))
+        sharedInstance.themes.insert(parsedThemeObject)
         
         // Second, set the default if we need to
         if sharedInstance.currentTheme == nil {
             sharedInstance.currentTheme = parsedTheme.name
         }
+        
+        return true
     }
     
     public class func getThemes() -> [String] {
@@ -63,13 +71,7 @@ public class Motif {
     
     public class func setTheme(key: String) -> Bool {
         // If the theme doesn't exist, return false
-        let containsTheme = sharedInstance.themes.contains({ object in
-            return object.name == key
-        })
-        
-        if !containsTheme {
-            return false
-        }
+        guard sharedInstance.themes.contains({ $0.name == key }) else { return false}
         
         // Otherwise, set the theme and update all views
         sharedInstance.currentTheme = key
@@ -81,13 +83,17 @@ public class Motif {
         return true
     }
     
-    public class func setObject<T: RawRepresentable>(type: T.Type, key: String, target: NSObject..., variable: String, file: String = #file) {
+    public class func setEnum<T: RawRepresentable>(type: T.Type, key: String, target: NSObject..., variable: String, file: String = #file) {
         for passedClass in target {
             sharedInstance.setObject(type, key: key, file: file, completion: { object in
                 // If it's an enum, work around that and set the rawValue
                 passedClass.setValue(object.rawValue as? AnyObject, forKey: variable)
             })
         }
+    }
+    
+    public class func setObject<T>(type: T.Type, key: String, file: String = #file, completion: (T) -> Void) {
+        sharedInstance.setObject(type, key: key, file: file, completion: completion)
     }
     
     public class func setObject<T>(type: T.Type, key: String, target: NSObject..., variable: String, file: String = #file) {
@@ -100,10 +106,6 @@ public class Motif {
         }
     }
     
-    public class func setObject<T>(type: T.Type, key: String, file: String = #file, completion: (T) -> Void) {
-        sharedInstance.setObject(type, key: key, file: file, completion: completion)
-    }
-    
     private func setObject<T>(type: T.Type, key: String, file: String, completion: (T) -> Void) {
         // Remove any spaces from the file string, and get the name of the calling class from its file path
         let patchedFile = file.stringByAddingPercentEncodingWithAllowedCharacters(.URLQueryAllowedCharacterSet())!
@@ -111,11 +113,11 @@ public class Motif {
         
         func applyObject() {
             do {
-                let object: T = try MotifUtils.getRelevantObject(className, key: key)
+                let object: T = try Utils.getRelevantObject(className, key: key)
                 
                 completion(object)
             } catch let error {
-                print("MotifKit Error: SET_OBJECT (\(error))")
+                fatalError("MotifKit Error: SET_OBJECT (\(error))")
             }
         }
         
