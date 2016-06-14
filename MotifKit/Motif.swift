@@ -96,6 +96,26 @@ public class Motif {
         sharedInstance.setObject(type, key: key, file: file, completion: completion)
     }
     
+    public class func setObjects<T>(type: T.Type, keys: [String], file: String = #file, completion: ([T]) -> Void) {
+        func applyObjects() {
+            var data = [T]()
+            
+            for key in keys {
+                sharedInstance.setObjectOnce(type, key: key, file: file, completion: { result in
+                    data.append(result)
+                })
+            }
+            
+            return completion(data)
+        }
+        
+        applyObjects()
+        
+        sharedInstance.updateEvents.append({
+            applyObjects()
+        })
+    }
+    
     public class func setObject<T>(type: T.Type, key: String, target: NSObject..., variable: String, file: String = #file) {
         for passedClass in target {
             
@@ -104,6 +124,10 @@ public class Motif {
                 passedClass.setValue(object as? AnyObject, forKey: variable)
             })
         }
+    }
+    
+    public class func onThemeChange(completion: () -> Void) {
+        sharedInstance.updateEvents.append(completion)
     }
     
     private func setObject<T>(type: T.Type, key: String, file: String, completion: (T) -> Void) {
@@ -128,5 +152,19 @@ public class Motif {
         updateEvents.append({
             applyObject()
         })
+    }
+    
+    private func setObjectOnce<T>(type: T.Type, key: String, file: String, completion: (T) -> Void) {
+        // Remove any spaces from the file string, and get the name of the calling class from its file path
+        let patchedFile = file.stringByAddingPercentEncodingWithAllowedCharacters(.URLQueryAllowedCharacterSet())!
+        let className = (NSURL(string: patchedFile)!.URLByDeletingPathExtension?.lastPathComponent)!
+        
+        do {
+            let object: T = try Utils.getRelevantObject(className, key: key)
+            
+            completion(object)
+        } catch let error {
+            fatalError("MotifKit Error: SET_OBJECT (\(error))")
+        }
     }
 }

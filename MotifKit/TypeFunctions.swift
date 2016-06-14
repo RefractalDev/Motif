@@ -26,6 +26,24 @@ extension Motif {
         })
     }
     
+    public class func setColors(keys: [String], file: String = #file, completion: ([UIColor]) -> Void) {
+        setObjects(UIColor.self, keys: keys, file: file, completion: completion)
+    }
+    
+    public class func setAttributes(keys: [String], file: String = #file, completion: ([[String: AnyObject]]) -> Void) {
+        setObjects([String: AnyObject].self, keys: keys, file: file, completion: completion)
+    }
+    
+    public class func setFonts(keys: [String], sizes: [CGFloat], file: String = #file, completion completionHandler: ([UIFont]) -> Void) {
+        setObjects(UIFont.self, keys: keys, file: file, completion: { (fonts: [UIFont]) in
+            var newResult = [UIFont]()
+            
+            for (index, font) in fonts.enumerate() {
+                newResult.append(font.fontWithSize(sizes[index]))
+            }
+        })
+    }
+    
     // Define our object specific versions
     
     public class func setColor(key: String, target: NSObject..., variable: String, file: String = #file) {

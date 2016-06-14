@@ -52,6 +52,7 @@ struct DarkTheme: MotifTheme {
     struct MotifKitTests: MotifClass {
         let TestColor = UIColor.greenColor()
         let TestFont = UIFont(name: "Avenir", size: 1)
+        let TestFont2 = UIFont(name: "Avenir-BlackOblique", size: 1)
         let TestAttributes: [String : AnyObject] = [
             NSForegroundColorAttributeName: UIColor.cyanColor(),
             NSFontAttributeName : UIFont(name: "Avenir-BlackOblique", size: 15)!
@@ -59,6 +60,10 @@ struct DarkTheme: MotifTheme {
         let TestEnum = TestEnumType.Two
         let TestObject = TestObjectClass()
         let TestString = "Testing"
+        
+        let String1 = "This is a string"
+        let String2 =  "So is this"
+        let String3 = "and this is too"
     }
 }
 

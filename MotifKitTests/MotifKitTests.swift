@@ -117,6 +117,12 @@ class MotifKitTests: XCTestCase {
             XCTAssertEqual(font, fontToCompare)
         })
         
+        Motif.setFonts(["TestFont", "TestFont2"], sizes: [12, 20], completion: { fonts in
+            let fontsToCompare = [UIFont(name: "Avenir", size: 12)!, UIFont(name: "Avenir-BoldOblique", size: 20)!]
+            
+            XCTAssertEqual(fonts, fontsToCompare)
+        })
+        
         Motif.setAttributes("TestAttributes", completion: { attributes in
             XCTAssertTrue(attributes == self.attributesToCompare)
         })
@@ -127,6 +133,12 @@ class MotifKitTests: XCTestCase {
         
         Motif.setObject(TestEnumType.self, key: "TestEnum", completion: { object in
             XCTAssertEqual(object, TestEnumType.Two)
+        })
+        
+        Motif.setObjects(String.self, keys: ["String1", "String2", "String3"], completion: { strings in
+            let compareTo = ["This is a string", "So is this", "and this is too"]
+            
+            XCTAssertEqual(strings, compareTo)
         })
     }
     
