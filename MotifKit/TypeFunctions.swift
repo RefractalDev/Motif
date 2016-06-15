@@ -41,6 +41,8 @@ extension Motif {
             for (index, font) in fonts.enumerate() {
                 newResult.append(font.fontWithSize(sizes[index]))
             }
+            
+            return completionHandler(newResult)
         })
     }
     

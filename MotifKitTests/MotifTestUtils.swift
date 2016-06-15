@@ -71,7 +71,7 @@ struct LightTheme: MotifTheme {
     let classes: [MotifClass] = [Default(), MotifKitTests()]
     
     struct Default: MotifClass {
-        
+        let TestDefaultColor = UIColor.purpleColor()
     }
     
     struct MotifKitTests: MotifClass {
