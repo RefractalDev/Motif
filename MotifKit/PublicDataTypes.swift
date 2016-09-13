@@ -25,17 +25,17 @@ public protocol MotifClass {
 // This enum handles all of our Error types and general throws
 // This allows us to quickly and efficiently provide error data while conforming to Swift 2's error handling
 
-public enum MotifError: ErrorType {
+public enum MotifError: Error {
     // We only support structs
-    case StructRequired
+    case structRequired
     // The class does not exist in the struct
-    case MissingClassDefinition(name: String)
+    case missingClassDefinition(name: String)
     // The entity does not contain a default data class
-    case NoDefaultClass
+    case noDefaultClass
     // There is no currently loaded template
-    case NoLoadedTemplate
+    case noLoadedTemplate
     // The provided key cannot be found in any theme class
-    case InvalidKey(name: String)
+    case invalidKey(name: String)
     // The provided object does not match the type defined
-    case TypeMismatch(name: String, type: String)
+    case typeMismatch(name: String, type: String)
 }

@@ -8,9 +8,9 @@
 
 import Foundation
 
-public class Motif {
+open class Motif {
     // This prevents others from using the default '()' initializer for this class.
-    private init() {}
+    fileprivate init() {}
     
     // Setup our private variable stack
     static let sharedInstance = Motif()
@@ -19,10 +19,10 @@ public class Motif {
     var themes = Set<ParsedTheme>()
     var updateEvents = [UpdateEvent]()
     
-    public class func addTheme(theme: MotifTheme) -> Bool {
+    public class func addTheme(_ theme: MotifTheme) -> Bool {
         // First, parse our theme class
         let parseData: (String, ThemeData)?
-        let error: ErrorType?
+        let error: Error?
         
         do {
             parseData = try Utils.parseTheme(theme)
@@ -54,7 +54,7 @@ public class Motif {
         return true
     }
     
-    public class func getThemes() -> [String] {
+    public class func getLoadedThemes() -> [String] {
         // Return a string list of the currently loaded themes
         return sharedInstance.themes.map({$0.name})
     }
@@ -69,12 +69,12 @@ public class Motif {
         sharedInstance.currentTheme = nil
     }
     
-    public class func setTheme(key: String) -> Bool {
+    public class func switchTo(theme: String) -> Bool {
         // If the theme doesn't exist, return false
-        guard sharedInstance.themes.contains({ $0.name == key }) else { return false}
+        guard sharedInstance.themes.contains(where: { $0.name == theme }) else { return false}
         
         // Otherwise, set the theme and update all views
-        sharedInstance.currentTheme = key
+        sharedInstance.currentTheme = theme
         
         for event in sharedInstance.updateEvents {
             event()
@@ -83,20 +83,20 @@ public class Motif {
         return true
     }
     
-    public class func setEnum<T: RawRepresentable>(type: T.Type, key: String, target: NSObject..., variable: String, file: String = #file) {
+    public class func set<T: RawRepresentable>(enum type: T.Type, key: String, target: NSObject..., variable: String, file: String = #file) {
         for passedClass in target {
-            sharedInstance.setObject(type, key: key, file: file, completion: { object in
+            sharedInstance.set(object: type, key: key, file: file, completion: { object in
                 // If it's an enum, work around that and set the rawValue
-                passedClass.setValue(object.rawValue as? AnyObject, forKey: variable)
+                passedClass.setValue(object.rawValue as AnyObject, forKey: variable)
             })
         }
     }
     
-    public class func setObject<T>(type: T.Type, key: String, file: String = #file, completion: (T) -> Void) {
-        sharedInstance.setObject(type, key: key, file: file, completion: completion)
+    public class func set<T>(object type: T.Type, key: String, file: String = #file, completion: @escaping (T) -> Void) {
+        sharedInstance.set(object: type, key: key, file: file, completion: completion)
     }
     
-    public class func setObjects<T>(type: T.Type, keys: [String], file: String = #file, completion: ([T]) -> Void) {
+    public class func set<T>(objects type: T.Type, keys: [String], file: String = #file, completion: @escaping ([T]) -> Void) {
         func applyObjects() {
             var data = [T]()
             
@@ -116,28 +116,29 @@ public class Motif {
         })
     }
     
-    public class func setObject<T>(type: T.Type, key: String, target: NSObject..., variable: String, file: String = #file) {
+    public class func set<T>(object type: T.Type, key: String, target: NSObject..., variable: String, file: String = #file) {
         for passedClass in target {
             
-            sharedInstance.setObject(type, key: key, file: file, completion: { object in
+            sharedInstance.set(object: type, key: key, file: file, completion: { object in
                 // If it's an object, handle it as an object
-                passedClass.setValue(object as? AnyObject, forKey: variable)
+                passedClass.setValue(object as AnyObject, forKey: variable)
             })
         }
     }
     
-    public class func onThemeChange(completion: () -> Void) {
+    public class func onThemeChange(_ completion: @escaping () -> Void) {
         sharedInstance.updateEvents.append(completion)
     }
     
-    private func setObject<T>(type: T.Type, key: String, file: String, completion: (T) -> Void) {
+    fileprivate func set<T>(object type: T.Type, key: String, file: String, completion: @escaping (T) -> Void) {
         // Remove any spaces from the file string, and get the name of the calling class from its file path
-        let patchedFile = file.stringByAddingPercentEncodingWithAllowedCharacters(.URLQueryAllowedCharacterSet())!
-        let className = (NSURL(string: patchedFile)!.URLByDeletingPathExtension?.lastPathComponent)!
+        
+        let patchedFile = file.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let className = (NSURL(string: patchedFile)!.deletingPathExtension?.lastPathComponent)!
         
         func applyObject() {
             do {
-                let object: T = try Utils.getRelevantObject(className, key: key)
+                let object: T = try Utils.getRelevantObject(file: className, key: key)
                 
                 completion(object)
             } catch let error {
@@ -154,13 +155,13 @@ public class Motif {
         })
     }
     
-    private func setObjectOnce<T>(type: T.Type, key: String, file: String, completion: (T) -> Void) {
+    fileprivate func setObjectOnce<T>(_ type: T.Type, key: String, file: String, completion: (T) -> Void) {
         // Remove any spaces from the file string, and get the name of the calling class from its file path
-        let patchedFile = file.stringByAddingPercentEncodingWithAllowedCharacters(.URLQueryAllowedCharacterSet())!
-        let className = (NSURL(string: patchedFile)!.URLByDeletingPathExtension?.lastPathComponent)!
+        let patchedFile = file.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let className = (NSURL(string: patchedFile)!.deletingPathExtension?.lastPathComponent)!
         
         do {
-            let object: T = try Utils.getRelevantObject(className, key: key)
+            let object: T = try Utils.getRelevantObject(file: className, key: key)
             
             completion(object)
         } catch let error {

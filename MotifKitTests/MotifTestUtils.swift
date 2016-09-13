@@ -10,18 +10,18 @@ import Foundation
 @testable import MotifKit
 
 enum TestEnumType: Int {
-    case One
-    case Two
-    case Three
-    case Four
+    case one
+    case two
+    case three
+    case four
 }
 
 class TestObjectClass: NSObject {
     var data: String = "stuff"
     var attribute = [String: AnyObject]()
-    var enumerator = TestEnumType.One
+    var enumerator = TestEnumType.one
     
-    override func setValue(value: AnyObject?, forKey key: String) {
+    override func setValue(_ value: Any?, forKey key: String) {
         if(value == nil) {
             return
         }
@@ -46,18 +46,18 @@ struct DarkTheme: MotifTheme {
     let classes: [MotifClass] = [Default(), MotifKitTests()]
     
     struct Default: MotifClass {
-        let TestDefaultColor = UIColor.purpleColor()
+        let TestDefaultColor = UIColor.purple
     }
     
     struct MotifKitTests: MotifClass {
-        let TestColor = UIColor.greenColor()
+        let TestColor = UIColor.green
         let TestFont = UIFont(name: "Avenir", size: 1)
         let TestFont2 = UIFont(name: "Avenir-BlackOblique", size: 1)
         let TestAttributes: [String : AnyObject] = [
-            NSForegroundColorAttributeName: UIColor.cyanColor(),
+            NSForegroundColorAttributeName: UIColor.cyan,
             NSFontAttributeName : UIFont(name: "Avenir-BlackOblique", size: 15)!
         ]
-        let TestEnum = TestEnumType.Two
+        let TestEnum = TestEnumType.two
         let TestObject = TestObjectClass()
         let TestString = "Testing"
         
@@ -71,15 +71,15 @@ struct LightTheme: MotifTheme {
     let classes: [MotifClass] = [Default(), MotifKitTests()]
     
     struct Default: MotifClass {
-        let TestDefaultColor = UIColor.purpleColor()
+        let TestDefaultColor = UIColor.purple
     }
     
     struct MotifKitTests: MotifClass {
-        let TestColor = UIColor.blueColor()
+        let TestColor = UIColor.blue
     }
 }
 
 
 public func ==(lhs: [String: AnyObject], rhs: [String: AnyObject] ) -> Bool {
-    return NSDictionary(dictionary: lhs).isEqualToDictionary(rhs)
+    return NSDictionary(dictionary: lhs).isEqual(to: rhs)
 }

@@ -12,34 +12,34 @@ extension Motif {
     
     // Define our completion handler versions
     
-    public class func setColor(key: String, file: String = #file, completion: (UIColor) -> Void) {
-        setObject(UIColor.self, key: key, file: file, completion: completion)
+    public class func set(color key: String, file: String = #file, completion: @escaping (UIColor) -> Void) {
+        set(object: UIColor.self, key: key, file: file, completion: completion)
     }
     
-    public class func setAttributes(key: String, file: String = #file, completion: ([String: AnyObject]) -> Void) {
-        setObject([String: AnyObject].self, key: key, file: file, completion: completion)
+    public class func set(attribute key: String, file: String = #file, completion: @escaping ([String: AnyObject]) -> Void) {
+        set(object: [String: AnyObject].self, key: key, file: file, completion: completion)
     }
     
-    public class func setFont(key: String, size: CGFloat, file: String = #file, completion completionHandler: (UIFont) -> Void) {
-        setObject(UIFont.self, key: key, file: file, completion: { (font: UIFont) in
-            completionHandler(font.fontWithSize(size))
+    public class func set(font key: String, size: CGFloat, file: String = #file, completion completionHandler: @escaping (UIFont) -> Void) {
+        set(object: UIFont.self, key: key, file: file, completion: { (font: UIFont) in
+            completionHandler(font.withSize(size))
         })
     }
     
-    public class func setColors(keys: [String], file: String = #file, completion: ([UIColor]) -> Void) {
-        setObjects(UIColor.self, keys: keys, file: file, completion: completion)
+    public class func set(colors keys: [String], file: String = #file, completion: @escaping ([UIColor]) -> Void) {
+        set(objects: UIColor.self, keys: keys, file: file, completion: completion)
     }
     
-    public class func setAttributes(keys: [String], file: String = #file, completion: ([[String: AnyObject]]) -> Void) {
-        setObjects([String: AnyObject].self, keys: keys, file: file, completion: completion)
+    public class func set(attributes keys: [String], file: String = #file, completion: @escaping ([[String: AnyObject]]) -> Void) {
+        set(objects: [String: AnyObject].self, keys: keys, file: file, completion: completion)
     }
     
-    public class func setFonts(keys: [String], sizes: [CGFloat], file: String = #file, completion completionHandler: ([UIFont]) -> Void) {
-        setObjects(UIFont.self, keys: keys, file: file, completion: { (fonts: [UIFont]) in
+    public class func set(fonts keys: [String], sizes: [CGFloat], file: String = #file, completion completionHandler: @escaping ([UIFont]) -> Void) {
+        set(objects: UIFont.self, keys: keys, file: file, completion: { (fonts: [UIFont]) in
             var newResult = [UIFont]()
             
-            for (index, font) in fonts.enumerate() {
-                newResult.append(font.fontWithSize(sizes[index]))
+            for (index, font) in fonts.enumerated() {
+                newResult.append(font.withSize(sizes[index]))
             }
             
             return completionHandler(newResult)
@@ -48,23 +48,35 @@ extension Motif {
     
     // Define our object specific versions
     
-    public class func setColor(key: String, target: NSObject..., variable: String, file: String = #file) {
+    public class func set(color key: String, target: [NSObject], variable: String, file: String = #file) {
         for passedClass in target {
-            setObject(UIColor.self, key: key, target: passedClass, variable: variable, file: file)
+            set(object: UIColor.self, key: key, target: passedClass, variable: variable, file: file)
         }
     }
     
-    public class func setAttributes(key: String, target: NSObject..., variable: String, file: String = #file) {
+    public class func set(attribute key: String, target: [NSObject], variable: String, file: String = #file) {
         for passedClass in target {
-            setObject([String: AnyObject].self, key: key, target: passedClass, variable: variable, file: file)
+            set(object: [String: AnyObject].self, key: key, target: passedClass, variable: variable, file: file)
         }
     }
     
-    public class func setFont(key: String, target: NSObject..., variable: String, size: CGFloat, file: String = #file) {
+    public class func set(font key: String, target: [NSObject], variable: String, size: CGFloat, file: String = #file) {
         for passedClass in target {
-            setObject(UIFont.self, key: key, file: file, completion: { (font: UIFont) in
-                passedClass.setValue(font.fontWithSize(size), forKey: variable)
+            set(object: UIFont.self, key: key, file: file, completion: { (font: UIFont) in
+                passedClass.setValue(font.withSize(size), forKey: variable)
             })
         }
+    }
+    
+    public class func set(color key: String, target: NSObject, variable: String, file: String = #file) {
+        set(color: key, target: [target], variable: variable, file: file)
+    }
+    
+    public class func set(attribute key: String, target: NSObject, variable: String, file: String = #file) {
+        set(attribute: key, target: [target], variable: variable, file: file)
+    }
+    
+    public class func set(font key: String, target: NSObject, variable: String, size: CGFloat, file: String = #file) {
+        set(font: key, target: [target], variable: variable, size: size, file: file)
     }
 }
