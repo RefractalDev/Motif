@@ -13,7 +13,7 @@ class MotifKitTests: XCTestCase {
     
     let fontToCompare = UIFont(name: "Avenir", size: 13.2)
     let attributesToCompare: [String : AnyObject] = [
-        NSForegroundColorAttributeName: UIColor.cyanColor(),
+        NSForegroundColorAttributeName: UIColor.cyan,
         NSFontAttributeName : UIFont(name: "Avenir-BlackOblique", size: 15)!
     ]
     
@@ -105,20 +105,20 @@ class MotifKitTests: XCTestCase {
     
     func testGettingObjectsFromCompletion() {
         let expectations = [
-            expectationWithDescription("TestColor should be Green"),
-            expectationWithDescription("TestFont should be Avenir at 13.2pt"),
-            expectationWithDescription("TestFont should be Avenir at 12pt, and TestFont2 should be AvenirBO at 20pt"),
-            expectationWithDescription("TestAttributes should match our test set"),
-            expectationWithDescription("TestObject should match the static data of TestObjectClass"),
-            expectationWithDescription("TestEnum should match TestEnumType.Two"),
-            expectationWithDescription("String1, String2, String3 should match 'This is a string', 'So is this' and 'this is too'")
+            expectation(description: "TestColor should be Green"),
+            expectation(description: "TestFont should be Avenir at 13.2pt"),
+            expectation(description: "TestFont should be Avenir at 12pt, and TestFont2 should be AvenirBO at 20pt"),
+            expectation(description: "TestAttributes should match our test set"),
+            expectation(description: "TestObject should match the static data of TestObjectClass"),
+            expectation(description: "TestEnum should match TestEnumType.Two"),
+            expectation(description: "String1, String2, String3 should match 'This is a string', 'So is this' and 'this is too'")
         ]
         
         Motif.addTheme(DarkTheme())
         
         Motif.setColor("TestColor", completion: { color in
             // Confirm it matches
-            XCTAssertEqual(color, UIColor.greenColor())
+            XCTAssertEqual(color, UIColor.green)
             expectations[0].fulfill()
         })
         
@@ -146,7 +146,7 @@ class MotifKitTests: XCTestCase {
         })
         
         Motif.setObject(TestEnumType.self, key: "TestEnum", completion: { object in
-            XCTAssertEqual(object, TestEnumType.Two)
+            XCTAssertEqual(object, TestEnumType.two)
             expectations[5].fulfill()
         })
         
@@ -157,7 +157,7 @@ class MotifKitTests: XCTestCase {
             expectations[6].fulfill()
         })
         
-        waitForExpectationsWithTimeout(2) { error in
+        waitForExpectations(timeout: 2) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }
@@ -165,8 +165,8 @@ class MotifKitTests: XCTestCase {
     }
     
     func testReloadingTheme() {
-        let firstExpectation = expectationWithDescription("TestColor should be Green")
-        let secondExpectation =  expectationWithDescription("TestColor should be Blue")
+        let firstExpectation = expectation(description: "TestColor should be Green")
+        let secondExpectation =  expectation(description: "TestColor should be Blue")
         var count = 0
         
         Motif.addTheme(DarkTheme())
@@ -175,10 +175,10 @@ class MotifKitTests: XCTestCase {
         Motif.setColor("TestColor", completion: { color in
             // Confirm it matches
             if count > 0 {
-                XCTAssertEqual(color, UIColor.blueColor())
+                XCTAssertEqual(color, UIColor.blue)
                 firstExpectation.fulfill()
             } else {
-                XCTAssertEqual(color, UIColor.greenColor())
+                XCTAssertEqual(color, UIColor.green)
                 secondExpectation.fulfill()
             }
             
@@ -187,7 +187,7 @@ class MotifKitTests: XCTestCase {
         
         Motif.setTheme("LightTheme")
         
-        waitForExpectationsWithTimeout(2) { error in
+        waitForExpectations(timeout: 2) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }
@@ -196,16 +196,16 @@ class MotifKitTests: XCTestCase {
     
     func testSettingObjectsWithData() {
         
-        let objectOne = UILabel(frame: CGRectZero)
-        let objectTwo = UILabel(frame: CGRectZero)
+        let objectOne = UILabel(frame: CGRect.zero)
+        let objectTwo = UILabel(frame: CGRect.zero)
         let dataObject = TestObjectClass()
         
         Motif.addTheme(DarkTheme())
         
         Motif.setColor("TestColor", target: [objectOne, objectTwo], variable: "textColor")
     
-        XCTAssertEqual(objectOne.textColor, UIColor.greenColor())
-        XCTAssertEqual(objectTwo.textColor, UIColor.greenColor())
+        XCTAssertEqual(objectOne.textColor, UIColor.green)
+        XCTAssertEqual(objectTwo.textColor, UIColor.green)
         
         Motif.setFont("TestFont", target: objectOne, variable: "font", size: 13.2)
         
@@ -217,7 +217,7 @@ class MotifKitTests: XCTestCase {
        
         Motif.setEnum(TestEnumType.self, key: "TestEnum", target: dataObject, variable: "enumerator")
         
-        XCTAssertEqual(dataObject.enumerator, TestEnumType.Two)
+        XCTAssertEqual(dataObject.enumerator, TestEnumType.two)
         
         Motif.setObject(String.self, key: "TestString", target: dataObject, variable: "data")
         
@@ -229,7 +229,7 @@ class MotifKitTests: XCTestCase {
         
         Motif.setColor("TestDefaultColor", completion: { color in
             // Confirm it matches
-            XCTAssertEqual(color, UIColor.purpleColor())
+            XCTAssertEqual(color, UIColor.purple)
         })
     }
 }
