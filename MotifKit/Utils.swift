@@ -9,18 +9,18 @@
 import Foundation
 
 class Utils {
-    class func parseTheme(theme: MotifTheme) throws -> (String, ThemeData) {
+    class func parseTheme(_ theme: MotifTheme) throws -> (String, ThemeData) {
         // First, get the theme name
-        let themeName = String(theme.dynamicType)
+        let themeName = String(describing: type(of: theme))
         
         // Reflect the theme so we can manipulate it
         let theme = Mirror(reflecting: theme)
         
         // Make sure we're analyzing a struct
-        guard theme.displayStyle == .Struct else { throw MotifError.StructRequired }
+        guard theme.displayStyle == .struct else { throw MotifError.structRequired }
         
         // Get the index of our classes array
-        let classesIndex = theme.children.indexOf({ child in
+        let classesIndex = theme.children.index(where: { child in
             return child.label == "classes"
         })
         
@@ -29,7 +29,7 @@ class Utils {
         var finalClassesArray = ThemeData()
         
         for (themeClass) in classesArray {
-            let className = String(themeClass.dynamicType)
+            let className = String(describing: type(of: themeClass))
             let classMirror = Mirror(reflecting: themeClass)
             
             var classProperties = [String: Any]()
@@ -46,18 +46,18 @@ class Utils {
         }
         
         // Double check we have a Default object
-        guard finalClassesArray.keys.contains("Default") else { throw MotifError.NoDefaultClass }
+        guard finalClassesArray.keys.contains("Default") else { throw MotifError.noDefaultClass }
         
         // And finally return all our data
         return (themeName, finalClassesArray)
     }
     
-    class func getRelevantObject<T>(file: String, key: String) throws -> T {
+    class func getRelevantObject<T>(_ file: String, key: String) throws -> T {
         // First, get our current theme name
-        guard let currentThemeKey = Motif.sharedInstance.currentTheme else { throw MotifError.NoLoadedTemplate }
+        guard let currentThemeKey = Motif.sharedInstance.currentTheme else { throw MotifError.noLoadedTemplate }
         
         // Second, acquire its index in the stack
-        let currentThemeIndex = Motif.sharedInstance.themes.indexOf({ object in
+        let currentThemeIndex = Motif.sharedInstance.themes.index(where: { object in
             return object.name == currentThemeKey
         })
         
@@ -82,14 +82,14 @@ class Utils {
         
         // If there's no match, and you don't have a class definition, throw a missing class error
         if (objectData == nil && classData == nil) {
-            throw MotifError.MissingClassDefinition(name: file)
+            throw MotifError.missingClassDefinition(name: file)
         }
         
         // If we don't match either, throw an invalid key error
-        guard (objectData != nil) else { throw MotifError.InvalidKey(name: key) }
+        guard (objectData != nil) else { throw MotifError.invalidKey(name: key) }
 
         /// If our given type doesn't match, then return an error
-        guard objectData is T else { throw MotifError.TypeMismatch(name: key, type: String(T.self)) }
+        guard objectData is T else { throw MotifError.typeMismatch(name: key, type: String(T.self)) }
         
         // And then return our lovely value
         return objectData as! T
